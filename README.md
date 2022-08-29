@@ -67,17 +67,17 @@ struct FlagsRegister {
     var carry: Bool
     
     func convertToByte() -> UInt8 {
-        (self.zero ? 1 : 0) << ZERO_POSITION |
-        (self.subtract ? 1: 0) << SUBTRACT_POSITION |
-        (self.halfCarry ? 1 : 0) << HALF_CARRY_POSITION |
-        (self.carry ? 1 : 0) << CARRY_POSITION
+        return (self.zero ? 1 : 0) << ZERO_POSITION |
+            (self.subtract ? 1: 0) << SUBTRACT_POSITION |
+            (self.halfCarry ? 1 : 0) << HALF_CARRY_POSITION |
+            (self.carry ? 1 : 0) << CARRY_POSITION
     }
     
     mutating func convertToFlags(value: UInt8) {
-        self.zero = ((value >> ZERO_POSITION) & 0x0b1) != 0
-        self.subtract = ((value >> SUBTRACT_POSITION) & 0x0b1) != 0
-        self.halfCarry = ((value >> HALF_CARRY_POSITION) & 0x0b1) != 0
-        self.carry = ((value >> CARRY_POSITION) & 0x0b1) != 0
+        self.zero = ((value >> ZERO_POSITION) & 0b1) != 0
+        self.subtract = ((value >> SUBTRACT_POSITION) & 0b1) != 0
+        self.halfCarry = ((value >> HALF_CARRY_POSITION) & 0b1) != 0
+        self.carry = ((value >> CARRY_POSITION) & 0b1) != 0
     }
 }
 ```
